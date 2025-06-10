@@ -1,16 +1,19 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class WinCondition : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        
-    }
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            //Aquí va la putada de cuando gane :thumbsup:
+            SceneManager.LoadScene("WinScreen");
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+            /*Cursor.lockState = CursorLockMode.Confined;
+            Cursor.visible = true;*/
+
+            Debug.Log("Ganaste");
+        }
     }
 }
