@@ -6,7 +6,7 @@ public class BackToMenu : MonoBehaviour
     public AudioSource sound;
     public AudioClip buttonClick;
 
-    public void goToMenu()
+    public void GoToMenu()
     {
         sound.PlayOneShot(buttonClick);
         Invoke("LoadScene", buttonClick.length);
