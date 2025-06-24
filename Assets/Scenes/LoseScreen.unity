@@ -355,7 +355,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 341336149}
         m_TargetAssemblyTypeName: StartGame, Assembly-CSharp
-        m_MethodName: goToLevelOne
+        m_MethodName: GoToLevelOne
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
