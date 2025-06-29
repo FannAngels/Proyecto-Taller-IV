@@ -7,7 +7,7 @@ public class StartGame : MonoBehaviour
     public AudioClip buttonClick;
 
 
-    public void goToLevelOne()
+    public void GoToLevelOne()
     {
         sound.PlayOneShot(buttonClick);
 
