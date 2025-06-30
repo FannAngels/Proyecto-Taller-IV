@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: dd2cff303ddd3244f9e27e4bf8447cd3
+guid: 8d9802cba98088144b667c21d1c16a5c
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 364216455578650354
-    second: Pared_0
+      213: -597419341397879403
+    second: Ghost Place Holder_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -51,7 +51,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 48
+  spritePixelsToUnits: 64
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Pared_0
+      name: Ghost Place Holder_0
       rect:
         serializedVersion: 2
-        x: 0
+        x: 16
         y: 0
-        width: 48
-        height: 48
+        width: 33
+        height: 59
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 2f60e18cfe4fd0500800000000000000
-      internalID: 364216455578650354
+      spriteID: 5951806364a85b7f0800000000000000
+      internalID: -597419341397879403
       vertices: []
       indices: 
       edges: []
@@ -138,7 +138,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Piso _0: -7938401869709896069
+      Ghost Place Holder_0: -597419341397879403
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
