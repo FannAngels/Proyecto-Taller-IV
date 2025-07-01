@@ -32,16 +32,16 @@ public class Enemy : MonoBehaviour
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        player = GameObject.FindGameObjectWithTag("player");
+        player = GameObject.FindGameObjectWithTag("Player");
 
         targetPoint = 0;
     }
 
     private void Update()
     {
-        /*if (hasTriggeredJumpscare) return;
+        if (hasTriggeredJumpscare) return;
 
-        if (CanSeePlayer())
+        /*if (CanSeePlayer())
         {
             StartCoroutine(TriggerJumpscare())
         }*/
@@ -71,9 +71,6 @@ public class Enemy : MonoBehaviour
         {
             isWaiting = true;
         }
-        
-
-
     }
 
     void increaseTargetInt() 
@@ -83,5 +80,32 @@ public class Enemy : MonoBehaviour
         {
             targetPoint = 0;
         }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (!hasTriggeredJumpscare && collision.gameObject.CompareTag("Player")) 
+        {
+            StartCoroutine(TriggerJumpscare());
+        }
+    }
+
+    IEnumerator TriggerJumpscare()
+    {
+        hasTriggeredJumpscare = true;
+        
+        if (jumpscare != null)
+        {
+            jumpscare.enabled = true;
+        }
+
+        yield return new WaitForSeconds(jumpscareDuration);
+
+        if (jumpscare != null)
+        {
+            jumpscare.enabled = false;
+        }
+
+        SceneManager.LoadScene("LoseScreen");
     }
 }
