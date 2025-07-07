@@ -13,6 +13,7 @@ public class Enemy : MonoBehaviour
     public float WaitTime = 0.5f;
     private bool isWaiting = false;
     private float waitTimer = 0f;
+    private Vector2 currentDirection = Vector2.right;
 
     [Header("Vision Settings")]
     public float visionRange = 5f;
@@ -27,7 +28,9 @@ public class Enemy : MonoBehaviour
 
     private Rigidbody2D rb;
     private GameObject player;
-    private bool hasTriggeredJumpscare = false;
+    public bool hasTriggeredJumpscare = false;
+
+    public bool detectPlayer = false;
     
     private void Start()
     {
@@ -41,10 +44,11 @@ public class Enemy : MonoBehaviour
     {
         if (hasTriggeredJumpscare) return;
 
-        /*if (CanSeePlayer())
+        if (CanSeePlayer())
         {
-            StartCoroutine(TriggerJumpscare())
-        }*/
+            StartCoroutine(TriggerJumpscare());
+            return;
+        }
 
         if (isWaiting)
         {
@@ -64,6 +68,10 @@ public class Enemy : MonoBehaviour
     private void Patrol()
     {
         Transform target = patrolPoints[targetPoint];
+        Vector3 direction = (target.position - transform.position).normalized;
+        currentDirection = direction;
+
+
         transform.position = Vector3.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
 
 
@@ -90,7 +98,32 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    IEnumerator TriggerJumpscare()
+    private bool CanSeePlayer()
+    {
+        if (player == null) return false;
+
+        Vector2 directionToPlayer = player.transform.position - transform.position;
+        float distanceToPlayer = directionToPlayer.magnitude;
+
+        // Too far
+        if (distanceToPlayer > visionRange) return false;
+
+        // Wrong angle
+        float angle = Vector2.Angle(currentDirection, directionToPlayer);
+
+        if (angle >visionAngle / 2f) return false;
+
+        // View Blocked
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, directionToPlayer.normalized, visionRange, visionMask);
+        if (hit.collider != null && hit.collider.CompareTag("Player")) 
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+    public IEnumerator TriggerJumpscare()
     {
         hasTriggeredJumpscare = true;
         
@@ -98,6 +131,8 @@ public class Enemy : MonoBehaviour
         {
             jumpscare.enabled = true;
         }
+
+        //jumpscareAudio?.Play();
 
         yield return new WaitForSeconds(jumpscareDuration);
 
@@ -107,5 +142,22 @@ public class Enemy : MonoBehaviour
         }
 
         SceneManager.LoadScene("LoseScreen");
+    }
+
+    //Cone Visualization
+    private void OnDrawGizmosSelected()
+    {
+        if (!Application.isPlaying) return;
+
+        Gizmos.color = Color.red;
+        Gizmos.DrawRay(transform.position, currentDirection * visionRange);
+
+        Vector3 leftBoundary = Quaternion.Euler(0, 0, visionAngle / 2) * currentDirection;
+        Vector3 rightBoundary = Quaternion.Euler(0, 0, -visionAngle / 2) * currentDirection;
+
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawRay(transform.position, leftBoundary * visionRange);
+        Gizmos.DrawRay(transform.position, rightBoundary * visionRange);
+
     }
 }
