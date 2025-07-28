@@ -36,3 +36,9 @@ public class PlayerDetection : MonoBehaviour
     }
 
 }
+
+public enum Rotation
+{
+    up, right, down, left  
+}
+

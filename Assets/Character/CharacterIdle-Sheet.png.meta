@@ -1,10 +1,16 @@
 fileFormatVersion: 2
-guid: 82d9e0a91ce23344cb51c8ec26348c0a
+guid: 807711ad6cfb2144aa172a2c7ae572f8
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 2469186977403139796
-    second: Line of Sight_0
+      213: -5835899900091891018
+    second: CharacterIdle-Sheet_0
+  - first:
+      213: 8470140799458023851
+    second: CharacterIdle-Sheet_1
+  - first:
+      213: 4936945267977203457
+    second: CharacterIdle-Sheet_2
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -37,7 +43,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -51,7 +57,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 64
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -75,7 +81,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -113,23 +119,67 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Line of Sight_0
+      name: CharacterIdle-Sheet_0
       rect:
         serializedVersion: 2
-        x: 1
-        y: 13
-        width: 146
-        height: 115
-      alignment: 2
-      pivot: {x: 0.5, y: 1}
+        x: 17
+        y: 2
+        width: 30
+        height: 59
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 4d672204970544220800000000000000
-      internalID: 2469186977403139796
+      spriteID: 6b20946f5f7b20fa0800000000000000
+      internalID: -5835899900091891018
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CharacterIdle-Sheet_1
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 2
+        width: 30
+        height: 59
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ba91d3d2e2cfb8570800000000000000
+      internalID: 8470140799458023851
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CharacterIdle-Sheet_2
+      rect:
+        serializedVersion: 2
+        x: 145
+        y: 2
+        width: 30
+        height: 59
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 10fa35d609d838440800000000000000
+      internalID: 4936945267977203457
       vertices: []
       indices: 
       edges: []
@@ -138,7 +188,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: abffaf606c066fd438188fcff4e6dbf7
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -148,7 +198,9 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Line of Sight_0: 2469186977403139796
+      CharacterIdle-Sheet_0: -5835899900091891018
+      CharacterIdle-Sheet_1: 8470140799458023851
+      CharacterIdle-Sheet_2: 4936945267977203457
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

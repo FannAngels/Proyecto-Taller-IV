@@ -8,10 +8,22 @@ public class PlayerMovement : MonoBehaviour
 
     public Camera cam;
 
-    //private Animator animator;
+    private Animator animator;
 
-    Vector2 movement; 
-    
+    Vector2 movement;
+
+    private readonly int idle = Animator.StringToHash("Idle");
+    private readonly int walkUp = Animator.StringToHash("WalkUp");
+    private readonly int walkDown = Animator.StringToHash("WalkDown");
+    private readonly int walkRight = Animator.StringToHash("WalkRight");
+
+    private void Start()
+    {
+        rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
+        //deathScreenController = FindObjectOfType<DeathScreenController>();
+    }
+
     //used for inputs
     void Update()
     {
@@ -21,15 +33,46 @@ public class PlayerMovement : MonoBehaviour
 
         Vector2 moveDelta = new Vector2 (movement.x, movement.y);
 
-        //flip player according to direction 
-        if(moveDelta.x > 0)
+        if (moveDelta.x != 0 && moveDelta.y != 0)
         {
-            transform.localScale = new Vector3(-1, 1, 1);
-        }
-        else if (moveDelta.x < 0)
+            animator.SetBool(idle, false);
+        } 
+
+        if (moveDelta.y > 0)
         {
-            transform.localScale = new Vector3(1, 1, 1);
+            animator.SetBool (walkRight, false);
+            animator.SetBool(walkDown, false);
+            animator.SetBool(walkUp, true);
         }
+
+        if (moveDelta.y < 0)
+        {
+            animator.SetBool(walkRight, false);
+            animator.SetBool(walkDown, true);
+            animator.SetBool(walkUp, false);
+        }
+
+        if (moveDelta.x != 0)
+        {
+            animator.SetBool(walkUp, false);
+            animator.SetBool(walkDown, false);
+            animator.SetBool(walkRight, true);
+
+            //flip player according to direction 
+            if (moveDelta.x > 0)
+            {
+                transform.localScale = new Vector3(1, 1, 1);
+            }
+            else if (moveDelta.x < 0)
+            {
+                transform.localScale = new Vector3(-1, 1, 1);
+            }
+        }
+        else
+        {
+
+        }
+       
 
         //Collision check
 
@@ -44,12 +87,7 @@ public class PlayerMovement : MonoBehaviour
         rb.MovePosition(rb.position +  movement * moveSpeed * Time.fixedDeltaTime);
     }
 
-    private void Start()
-    {
-        rb = GetComponent<Rigidbody2D>();
-        //animator = GetComponent<Animator>();
-        //deathScreenController = FindObjectOfType<DeathScreenController>();
-    }
+
 
     /*void Muerte()
     {

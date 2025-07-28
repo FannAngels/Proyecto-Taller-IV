@@ -19,6 +19,8 @@ public class Enemy : MonoBehaviour
     public float visionRange = 5f;
     public float visionAngle = 45f;
     public LayerMask visionMask;
+    public Rotation rotation;
+    public GameObject pov;
 
     [Header("Jumscare Settings")]
     public Image jumpscare;
@@ -44,6 +46,8 @@ public class Enemy : MonoBehaviour
     {
         if (hasTriggeredJumpscare) return;
 
+
+
         if (isWaiting)
         {
             waitTimer += Time.deltaTime; 
@@ -68,6 +72,7 @@ public class Enemy : MonoBehaviour
 
         transform.position = Vector3.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
 
+        RotateView();
 
         if (Vector3.Distance(transform.position, target.position) < 0.01f)
         {
@@ -90,6 +95,11 @@ public class Enemy : MonoBehaviour
         {
             StartCoroutine(TriggerJumpscare());
         }
+
+        if (collision.gameObject.CompareTag("Waypoint"))
+        {
+            Debug.Log("Entré");
+        }
     }
 
     public IEnumerator TriggerJumpscare()
@@ -111,5 +121,40 @@ public class Enemy : MonoBehaviour
         }
 
         SceneManager.LoadScene("LoseScreen");
+    }
+
+    public void RotateView()
+    {
+        if (pov == null) return;
+
+        // Use currentDirection to determine facing
+        if (Mathf.Abs(currentDirection.x) > Mathf.Abs(currentDirection.y))
+        {
+            // Horizontal movement
+            if (currentDirection.x > 0)
+            {
+                rotation = Rotation.right;
+                pov.transform.rotation = Quaternion.Euler(0, 0, 90);
+            }
+            else
+            {
+                rotation = Rotation.left;
+                pov.transform.rotation = Quaternion.Euler(0, 0, 270);
+            }
+        }
+        else
+        {
+            // Vertical movement
+            if (currentDirection.y > 0)
+            {
+                rotation = Rotation.up;
+                pov.transform.rotation = Quaternion.Euler(0, 0, 180);
+            }
+            else
+            {
+                rotation = Rotation.down;
+                pov.transform.rotation = Quaternion.Euler(0, 0, 0);
+            }
+        }
     }
 }
