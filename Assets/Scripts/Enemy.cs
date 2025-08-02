@@ -14,6 +14,7 @@ public class Enemy : MonoBehaviour
     private bool isWaiting = false;
     private float waitTimer = 0f;
     private Vector2 currentDirection = Vector2.right;
+    private Animator animator;
 
     [Header("Vision Settings")]
     public float visionRange = 5f;

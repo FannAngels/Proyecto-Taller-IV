@@ -33,7 +33,11 @@ public class PlayerMovement : MonoBehaviour
 
         Vector2 moveDelta = new Vector2 (movement.x, movement.y);
 
-        if (moveDelta.x != 0 && moveDelta.y != 0)
+        animator.SetFloat("Horizontal", movement.x);
+        animator.SetFloat("Vertical", movement.y);
+        animator.SetFloat("Speed", movement.sqrMagnitude);
+
+        /*if (moveDelta.x != 0 && moveDelta.y != 0)
         {
             animator.SetBool(idle, false);
         } 
@@ -71,8 +75,8 @@ public class PlayerMovement : MonoBehaviour
         else
         {
 
-        }
-       
+        }*/
+
 
         //Collision check
 
