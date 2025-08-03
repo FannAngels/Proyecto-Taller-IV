@@ -39,6 +39,8 @@ public class Enemy : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         player = GameObject.FindGameObjectWithTag("Player");
+        animator = GetComponent<Animator>();
+
 
         targetPoint = 0;
     }
@@ -70,8 +72,10 @@ public class Enemy : MonoBehaviour
         Vector3 direction = (target.position - transform.position).normalized;
         currentDirection = direction;
 
-
         transform.position = Vector3.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
+        Vector3 movement = transform.position;
+
+        
 
         RotateView();
 
@@ -127,6 +131,10 @@ public class Enemy : MonoBehaviour
     public void RotateView()
     {
         if (pov == null) return;
+
+        animator.SetFloat("Horizontal", currentDirection.x);
+        animator.SetFloat("Vertical", currentDirection.y);
+        animator.SetFloat("Speed", currentDirection.sqrMagnitude);
 
         // Use currentDirection to determine facing
         if (Mathf.Abs(currentDirection.x) > Mathf.Abs(currentDirection.y))
