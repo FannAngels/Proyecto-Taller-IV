@@ -11,19 +11,11 @@ public class PlayerDetection : MonoBehaviour
         col.isTrigger = true;
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         if (!enemy.hasTriggeredJumpscare && collision.gameObject.CompareTag("Player"))
         {
             StartCoroutine(enemy.TriggerJumpscare());
-        }
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Player")) 
-        {
-            enemy.detectPlayer = true; 
         }
     }
 

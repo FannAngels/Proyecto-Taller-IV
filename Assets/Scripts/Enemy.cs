@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.Rendering.Universal;
 
 public class Enemy : MonoBehaviour
 {
@@ -15,6 +16,8 @@ public class Enemy : MonoBehaviour
     private float waitTimer = 0f;
     private Vector2 currentDirection = Vector2.right;
     private Animator animator;
+    public Light2D rightEye;
+    public Light2D leftEye;
 
     [Header("Vision Settings")]
     public float visionRange = 5f;
@@ -40,7 +43,8 @@ public class Enemy : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         player = GameObject.FindGameObjectWithTag("Player");
         animator = GetComponent<Animator>();
-
+        leftEye.enabled = false;
+        rightEye.enabled = false;
 
         targetPoint = 0;
     }
@@ -142,11 +146,15 @@ public class Enemy : MonoBehaviour
             // Horizontal movement
             if (currentDirection.x > 0)
             {
+                leftEye.enabled = false;
+                rightEye.enabled = false;
                 rotation = Rotation.right;
                 pov.transform.rotation = Quaternion.Euler(0, 0, 90);
             }
             else
             {
+                leftEye.enabled = false;
+                rightEye.enabled = false;
                 rotation = Rotation.left;
                 pov.transform.rotation = Quaternion.Euler(0, 0, 270);
             }
@@ -156,11 +164,16 @@ public class Enemy : MonoBehaviour
             // Vertical movement
             if (currentDirection.y > 0)
             {
+                leftEye.enabled = false;
+                rightEye.enabled = false;
                 rotation = Rotation.up;
                 pov.transform.rotation = Quaternion.Euler(0, 0, 180);
             }
             else
             {
+                leftEye.enabled = true;
+                rightEye.enabled = true;
+
                 rotation = Rotation.down;
                 pov.transform.rotation = Quaternion.Euler(0, 0, 0);
             }

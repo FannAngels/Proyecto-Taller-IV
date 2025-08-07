@@ -11,24 +11,13 @@ public class CandlesPuzzle : MonoBehaviour
     private CandlePuzzleManager puzzleManager;
     private Lighter lighter;
 
-    [SerializeField]public Light2D candleLight; // Drag your child light object in the inspector
+    public Light2D candleLight; // Drag your child light object in the inspector
 
     private void Awake()
     {
-        candleSprite = GetComponent<SpriteRenderer>();
+        candleLight.gameObject.SetActive(false);
+        //candleLight.enabled = false;
         candleFire.SetActive(false); // Make sure it's off at start
-    }
-
-    private void OnMouseDown()
-    {
-        if (Vector2.Distance(transform.position, lighter.transform.position) > 2f) return;
-
-        if (lighter.hasLighter && !isLit)
-        {
-            isLit = true;
-            candleFire.SetActive(true); // Enable the visual
-            puzzleManager.CheckPuzzle();
-        }
     }
 
     void Update()
@@ -48,14 +37,20 @@ public class CandlesPuzzle : MonoBehaviour
 
     void TryToLightCandle()
     {
-        Lighter inventory = GameObject.FindWithTag("Player").GetComponent<Lighter>();
+        if (isLit) return;
+        if (lighter == null || !lighter.hasLighter) return;
+        if (Vector2.Distance(transform.position, lighter.transform.position) > 2f) return;
 
-        if (inventory.hasLighter && !isLit)
-        {
-            isLit = true;
+        isLit = true;
+
+        if (candleFire != null)
+            candleFire.SetActive(true);
+
+        if (candleLight != null)
             candleLight.enabled = true;
+
+        if (puzzleManager != null)
             puzzleManager.CheckPuzzle();
-        }
     }
    
 }
