@@ -32,6 +32,7 @@ public class JigsawManager : MonoBehaviour
 
             image.GetComponent<Button>().onClick.AddListener(delegate { StartGame(texture); });
 
+            
         }
     }
 
@@ -42,6 +43,7 @@ public class JigsawManager : MonoBehaviour
 
         // List for each jigsaw piece
         pieces = new List<Transform>();
+        Debug.Log(pieces.Count);
 
         //Calculate size of jigsaw pieces based on difficulty 
         dimensions = GetDimensions(jigsawTexture, difficulty);
@@ -85,9 +87,49 @@ public class JigsawManager : MonoBehaviour
                 piece.localScale = new Vector3(width, height, 1f);
 
                 piece.name = $"Piece {(row * dimensions.x) + col}";
+                Debug.Log($"{piece.name} adding to pieces next line");
                 pieces.Add(piece);
+                Debug.Log(pieces.Count);
 
+
+                float width1 = 1f / dimensions.x;
+                float height1 = 1f / dimensions.y;
+
+                Vector2[] uv = new Vector2[4];
+                uv[0] = new Vector2(width1 * col, height1 * row);
+                uv[1] = new Vector2(width1 * (col + 1), height1 * row);
+                uv[2] = new Vector2(width1 * col, height1 * (row + 1));
+                uv[3] = new Vector2(width1 * (col + 1), height1 * (row + 1));
+
+                Mesh mesh = piece.GetComponent<MeshFilter>().mesh;
+                mesh.uv = uv;
+
+                piece.GetComponent<MeshRenderer>().material.SetTexture("_MainTex", jigsawTexture);
+
+                Scatter();
             }
+        }
+    }
+
+    private void Scatter()
+    {
+        float ortoHeight = Camera.main.orthographicSize;
+        float screenAspect = (float)Screen.width / Screen.height;
+        float ortoWidth = (screenAspect * ortoHeight);
+
+        float pieceWidth = width * gameHolder.localScale.x;
+        float pieceHeight = height * gameHolder.localScale.y;
+
+        ortoHeight -= pieceHeight;
+        ortoWidth -= pieceWidth;
+
+        foreach (Transform piece in pieces)
+        {
+            float x = Random.Range(-ortoWidth, ortoWidth);
+            float y = Random.Range(-ortoHeight, ortoHeight);
+
+            piece.position = new Vector3(x, y, -1);
+
         }
     }
 }
