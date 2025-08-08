@@ -97,6 +97,7 @@ GameObject:
   - component: {fileID: 1897546698937336858}
   - component: {fileID: 460817806127128103}
   - component: {fileID: 2864102341051003571}
+  - component: {fileID: 889537834746551161}
   m_Layer: 0
   m_Name: CandelaPuzzle
   m_TagString: Untagged
@@ -283,7 +284,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isLit: 0
   candleFire: {fileID: 5878873833193549223}
+  puzzleManager: {fileID: 0}
+  lighter: {fileID: 0}
   candleLight: {fileID: 7817142610379111762}
+  interactionDistance: 1
+--- !u!114 &889537834746551161
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4110792242509655953}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02b1ce230fd8a1042994323826d8e2d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  text: Insert text here.
 --- !u!1 &5878873833193549223
 GameObject:
   m_ObjectHideFlags: 0

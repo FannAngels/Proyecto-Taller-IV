@@ -37,6 +37,8 @@ public class Enemy : MonoBehaviour
     public bool hasTriggeredJumpscare = false;
 
     public bool detectPlayer = false;
+
+    public float speedIncrease = 0.5f;
     
     private void Start()
     {
@@ -182,7 +184,8 @@ public class Enemy : MonoBehaviour
 
     public void IncreaseDifficulty(int failedAttempts)
     {
-        speed += failedAttempts * 0.5f; // Gets faster per fail
+        speed += speedIncrease;
+        Debug.Log("Enemy speed increased to: " + speed);
     }
 
 }

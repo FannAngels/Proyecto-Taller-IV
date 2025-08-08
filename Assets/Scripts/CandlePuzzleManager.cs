@@ -7,20 +7,25 @@ public class CandlePuzzleManager : MonoBehaviour
     private int failedAttempts = 0;
     public Enemy enemy; // Reference to the enemy script
 
-    public void CheckPuzzle()
+    [Header("Order Settings")]
+    public int currentIndex = 0;
+
+    public void CandleLit (CandlesPuzzle candle)
     {
-        int litCount = 0;
+        int candleIndex = System.Array.IndexOf(candles, candle);
+        Debug.Log($"Candle Index{candleIndex}");
 
-        foreach (CandlesPuzzle c in candles)
+        if (candleIndex == currentIndex)
         {
-            if (c.isLit) litCount++;
-        }
+            currentIndex++;
 
-        if (litCount == candles.Length)
-        {
-            door.SetActive(false); // Door opens
+            if (currentIndex >= candles.Length)
+            {
+                door.SetActive(false);
+                Debug.Log("Puzzle Solved!");
+            }
         }
-        else if (litCount > 0 && !IsCorrectOrder()) // Optional fail condition
+        else
         {
             failedAttempts++;
             enemy.IncreaseDifficulty(failedAttempts);
@@ -28,18 +33,25 @@ public class CandlePuzzleManager : MonoBehaviour
         }
     }
 
-    public bool IsCorrectOrder()
-    {
-        // OPTIONAL: implement if you want ordered puzzle
-        return true;
-    }
-
     public void ResetPuzzle()
     {
+        Debug.Log("Wrong order! Puzzle reset.");
+
         foreach (CandlesPuzzle c in candles)
         {
             c.isLit = false;
-            // Reset sprite here if needed
+            if (c.candleFire != null) c.candleFire.SetActive(false);
+            if (c.candleLight != null) c.candleLight.enabled = false;
         }
+
+        currentIndex = 0;
     }
+
+    /*public bool IsCorrectOrder()
+    {
+        // OPTIONAL: implement if you want ordered puzzle
+        return true;
+    }*/
+
+    
 }

@@ -3,54 +3,67 @@ using UnityEngine.Rendering.Universal;
 
 public class CandlesPuzzle : MonoBehaviour
 {
+    [Header("Candle State")]
     public bool isLit = false;
-    private SpriteRenderer candleSprite;
+    //private SpriteRenderer candleSprite;
 
     [Header("References")]
-    public GameObject candleFire;
-    private CandlePuzzleManager puzzleManager;
-    private Lighter lighter;
+    [SerializeField] public GameObject candleFire;
+    [SerializeField] private CandlePuzzleManager puzzleManager;
+    [SerializeField] private Lighter lighter;
+    [SerializeField] public Light2D candleLight;
 
-    public Light2D candleLight; // Drag your child light object in the inspector
+    [Header("Interaction Settings")]
+    [SerializeField] public float interactionDistance = 1.0f;
 
     private void Awake()
     {
-        candleLight.gameObject.SetActive(false);
-        //candleLight.enabled = false;
-        candleFire.SetActive(false); // Make sure it's off at start
+        if (candleFire != null) { candleFire.SetActive(false); }
+
+        if (candleLight != null) { candleLight.enabled = false;}
+
+        //candleLight.gameObject.SetActive(false);
+        candleLight.enabled = false;
+        candleFire.SetActive(false);
     }
 
-    void Update()
+    private void Start()
+    {
+        lighter = GameObject.FindWithTag("Player").GetComponent<Lighter>();
+    }
+
+    private void Update()
     {
 
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetKeyDown(KeyCode.E))
         {
-            Vector2 worldPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            RaycastHit2D hit = Physics2D.Raycast(worldPoint, Vector2.zero);
-
-            if (hit.collider != null && hit.collider.gameObject == this.gameObject)
-            {
-                TryToLightCandle();
-            }
+            TryToLightCandle();
         }
     }
 
     void TryToLightCandle()
     {
+        if (Vector2.Distance(transform.position, lighter.transform.position) > interactionDistance)
+        {
+            return;
+        }
+
         if (isLit) return;
         if (lighter == null || !lighter.hasLighter) return;
-        if (Vector2.Distance(transform.position, lighter.transform.position) > 2f) return;
 
-        isLit = true;
+        if (lighter.hasLighter && !isLit)
+        { 
+            isLit = true;
 
-        if (candleFire != null)
-            candleFire.SetActive(true);
+            if (candleFire != null)
+                candleFire.SetActive(true);
 
-        if (candleLight != null)
-            candleLight.enabled = true;
+            if (candleLight != null)
+                candleLight.enabled = true;
 
-        if (puzzleManager != null)
-            puzzleManager.CheckPuzzle();
+            if (puzzleManager != null)
+                puzzleManager.CandleLit(this);
+        }
     }
    
 }
