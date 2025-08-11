@@ -661,9 +661,7 @@ MonoBehaviour:
   piecePrefab: {fileID: 5133160830140340235, guid: 50401b35e84f79d45864a49b387bd7e5,
     type: 3}
   imageTexture:
-  - {fileID: 2800000, guid: a61c8183b953c84419c3b2c2c3c53b4d, type: 3}
   - {fileID: 2800000, guid: baff5cd007495dc428bf63ac739d7221, type: 3}
-  - {fileID: 2800000, guid: ce22cc60e065ef641bca2f5c051ec42b, type: 3}
   - {fileID: 2800000, guid: 905203f1e0fef564da06ab343b1aaaa3, type: 3}
   levelSelectPanel: {fileID: 1331167976}
   levelSelectPrefab: {fileID: 2753181817291353602, guid: 6229d11370672984c9d257168c161e8d,
