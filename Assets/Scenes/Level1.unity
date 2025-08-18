@@ -1620,7 +1620,7 @@ TilemapRenderer:
   m_SortingLayer: 0
   m_SortingOrder: -5
   m_ChunkSize: {x: 32, y: 32, z: 32}
-  m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
+  m_ChunkCullingBounds: {x: 0.5, y: 0.5, z: 0}
   m_MaxChunkCount: 16
   m_MaxFrameAge: 16
   m_SortOrder: 0
@@ -38013,7 +38013,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -2209255722639260490, guid: f690569684486cf46a6ff1c5d5f3cf20,
+  m_Sprite: {fileID: 3967533244948171398, guid: 852702600f1b20c4691374ac189e9d4f,
     type: 3}
   m_Type: 0
   m_PreserveAspect: 0
@@ -48290,6 +48290,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d41ddb1133e659743a476385e91f6072, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  interactionDistance: 1
 --- !u!1001 &1123514906
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -3,14 +3,14 @@ using UnityEngine.SceneManagement;
 
 public class BackToMenu : MonoBehaviour
 {
-    public AudioSource sound;
-    public AudioClip buttonClick;
+    //public AudioSource sound;
+    //public AudioClip buttonClick;
 
-    public void GoToMenu()
+    /*public void GoToMenu()
     {
-        sound.PlayOneShot(buttonClick);
+        //sound.PlayOneShot(buttonClick);
         Invoke("LoadScene", buttonClick.length);
-    }
+    }*/
 
     public void LoadScene()
     {
