@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 4afd56a8661bffe4d82b24c8f9941637
+AssetOrigin:
+  serializedVersion: 1
+  productId: 103938
+  packageName: Game Jolt API
+  packageVersion: 2.5.8
+  assetPath: Assets/Plugins/GameJolt/Scripts/API/GameJoltAPI.cs
+  uploadId: 536125
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 100
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
