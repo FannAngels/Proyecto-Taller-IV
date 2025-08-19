@@ -1,6 +1,7 @@
-using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.UI;
 
 public class JigsawManager : MonoBehaviour
@@ -16,6 +17,7 @@ public class JigsawManager : MonoBehaviour
     [SerializeField] private Transform levelSelectPanel;
     [SerializeField] private Image levelSelectPrefab;
     [SerializeField] private GameObject playAgainButton;
+    [SerializeField] private GameObject playAgainButton2;
 
     private List<Transform> pieces;
     private Vector2Int dimensions;
@@ -27,10 +29,25 @@ public class JigsawManager : MonoBehaviour
 
     private int piecesCorrect;
 
+    public WinCondition winCondition;
+
+    int imageIndex;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        foreach (Texture2D texture in imageTexture)
+        imageTexture.
+
+
+        for (int i = 0; i < imageTexture.Count; i++)
+        {
+            Image image = Instantiate(levelSelectPrefab, levelSelectPanel);
+            image.sprite = Sprite.Create(imageTexture[i], new Rect(0, 0, imageTexture[i].width, imageTexture[i].height), Vector2.zero);
+
+            image.GetComponent<Button>().onClick.AddListener(delegate { StartGame(imageTexture[i], i + 1); });
+        }
+
+        /*foreach (Texture2D texture in imageTexture)
         {
             Image image = Instantiate(levelSelectPrefab, levelSelectPanel);
             image.sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), Vector2.zero);
@@ -38,11 +55,11 @@ public class JigsawManager : MonoBehaviour
             image.GetComponent<Button>().onClick.AddListener(delegate { StartGame(texture); });
 
             
-        }
+        }*/
     }
 
     // Update is called once per frame
-    public void StartGame(Texture2D jigsawTexture)
+    public void StartGame(Texture2D jigsawTexture, int puzzle)
     {
         levelSelectPanel.gameObject.SetActive(false);
 
@@ -60,6 +77,8 @@ public class JigsawManager : MonoBehaviour
         UpdateBorder();
 
         piecesCorrect = 0;
+
+        imageIndex = puzzle;
     }
 
     Vector2Int GetDimensions(Texture2D jigsawTexture, int difficulty)
@@ -206,15 +225,25 @@ public class JigsawManager : MonoBehaviour
                 draggingPiece.GetComponent<BoxCollider2D>().enabled = false;
 
                 piecesCorrect++;
+
                 if (piecesCorrect == pieces.Count)
                 {
-                    playAgainButton.SetActive(true);
+                    switch (imageIndex)
+                    {
+                        case 1:
+                            playAgainButton.SetActive(true);
+                            break;
+
+                        case 2:
+                            playAgainButton2.SetActive(true);
+                            break;
+                    }
                 }
             }
         }
     }
 
-    public void RestartGame()
+    public void RestartGame(int puzzle)
     {
         foreach (Transform piece in pieces)
         {
@@ -227,8 +256,25 @@ public class JigsawManager : MonoBehaviour
         playAgainButton.SetActive(false);
         levelSelectPanel.gameObject.SetActive(true);
 
+        winCondition.ImageDone(puzzle);
+
     }
 
+    public void RestartGame2(int puzzle)
+    {
+        foreach (Transform piece in pieces)
+        {
+            Destroy(piece.gameObject);
+        }
+        pieces.Clear();
 
+        gameHolder.GetComponent<LineRenderer>().enabled = false;
+
+        playAgainButton.SetActive(false);
+        levelSelectPanel.gameObject.SetActive(true);
+
+        winCondition.ImageDone(puzzle);
+
+    }
 
 }

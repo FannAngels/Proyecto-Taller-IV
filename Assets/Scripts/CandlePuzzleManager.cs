@@ -22,6 +22,17 @@ public class CandlePuzzleManager : MonoBehaviour
             if (currentIndex >= candles.Length)
             {
                 door.SetActive(false);
+                GameJolt.API.Trophies.Unlock(277169, (bool success) =>
+                {
+                    if (success)
+                    {
+                        Debug.Log("Success!");
+                    }
+                    else
+                    {
+                        Debug.Log("Something went wrong");
+                    }
+                });
                 Debug.Log("Puzzle Solved!");
             }
         }

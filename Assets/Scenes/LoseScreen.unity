@@ -267,7 +267,6 @@ GameObject:
   - component: {fileID: 341336152}
   - component: {fileID: 341336151}
   - component: {fileID: 341336150}
-  - component: {fileID: 341336149}
   m_Layer: 5
   m_Name: Retry
   m_TagString: Untagged
@@ -295,18 +294,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -150}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &341336149
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 341336147}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7a8b62301bfc5a04ca8d997bd04c860d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &341336150
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -351,10 +338,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11500000, guid: 7a8b62301bfc5a04ca8d997bd04c860d, type: 3}
-        m_TargetAssemblyTypeName: UnityEngine.Object, UnityEngine
-        m_MethodName: set_name
-        m_Mode: 5
+      - m_Target: {fileID: 986817718}
+        m_TargetAssemblyTypeName: RetryGame, Assembly-CSharp
+        m_MethodName: GoToLevelOne
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -413,7 +400,6 @@ GameObject:
   - component: {fileID: 520522361}
   - component: {fileID: 520522360}
   - component: {fileID: 520522359}
-  - component: {fileID: 520522358}
   m_Layer: 5
   m_Name: Back To Menu
   m_TagString: Untagged
@@ -441,18 +427,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -300}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &520522358
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 520522356}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 58587c869f42e414b9d4ad68a61c2847, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &520522359
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -497,10 +471,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11500000, guid: 58587c869f42e414b9d4ad68a61c2847, type: 3}
-        m_TargetAssemblyTypeName: UnityEngine.Object, UnityEngine
-        m_MethodName: set_name
-        m_Mode: 5
+      - m_Target: {fileID: 986817717}
+        m_TargetAssemblyTypeName: BackToMenu, Assembly-CSharp
+        m_MethodName: LoadScene
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -785,6 +759,8 @@ GameObject:
   - component: {fileID: 986817715}
   - component: {fileID: 986817714}
   - component: {fileID: 986817713}
+  - component: {fileID: 986817718}
+  - component: {fileID: 986817717}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -877,6 +853,30 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &986817717
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 986817712}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58587c869f42e414b9d4ad68a61c2847, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &986817718
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 986817712}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 697a3ef73e96eae4c95f629473d063a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1859083746
 GameObject:
   m_ObjectHideFlags: 0
