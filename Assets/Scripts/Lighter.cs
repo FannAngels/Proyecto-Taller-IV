@@ -1,3 +1,4 @@
+using GameJolt.API.Objects;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 
@@ -30,7 +31,21 @@ public class Lighter : MonoBehaviour
         Destroy(pickup);         // remove the world pickup
         pickup = null;
 
-        if (characterLight != null) characterLight.enabled = true;
+        if (characterLight != null) 
+        {
+            characterLight.enabled = true;
+            GameJolt.API.Trophies.Unlock(277168, (bool success) => 
+            {
+                if (success)
+                {
+                    Debug.Log("Success!");
+                }
+                else
+                {
+                    Debug.Log("Something went wrong");
+                }
+            });
+        }
 
         // Optional: notify other systems, raise an event, play SFX, UI update, etc.
     }
