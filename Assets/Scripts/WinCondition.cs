@@ -45,6 +45,17 @@ public class WinCondition : MonoBehaviour
 
     public void FinishGame()
     {
+        GameJolt.API.Trophies.Unlock(277236, (bool success) =>
+        {
+            if (success)
+            {
+                Debug.Log("Success!");
+            }
+            else
+            {
+                Debug.Log("Something went wrong");
+            }
+        });
         SceneManager.LoadScene("WinScreen");
     }
 

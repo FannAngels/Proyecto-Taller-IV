@@ -132,6 +132,18 @@ public class Enemy : MonoBehaviour
         }
 
         SceneManager.LoadScene("LoseScreen");
+
+        GameJolt.API.Trophies.Unlock(277237, (bool success) =>
+        {
+            if (success)
+            {
+                Debug.Log("Success!");
+            }
+            else
+            {
+                Debug.Log("Something went wrong");
+            }
+        });
     }
 
     public void RotateView()

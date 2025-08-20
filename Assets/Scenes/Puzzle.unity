@@ -735,7 +735,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 480d817a4e3f687498245ece3750bba8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  difficulty: 2
+  difficulty: 4
   gameHolder: {fileID: 1656162997}
   piecePrefab: {fileID: 5133160830140340235, guid: 50401b35e84f79d45864a49b387bd7e5,
     type: 3}
