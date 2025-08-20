@@ -10,15 +10,19 @@ public class Lighter : MonoBehaviour
 
     private GameObject pickup = null;
 
+    PlayerMovement playerMovement;
+
     private void Awake()
     {
+        playerMovement = GetComponent<PlayerMovement>();
+
         if (characterLight != null) characterLight.enabled = false;
     }
 
     private void Update()
     {
         // If we're near a pickup and press E, pick it up
-        if (!hasLighter && pickup != null && Input.GetKeyDown(KeyCode.E))
+        if (!hasLighter && pickup != null && playerMovement.playerController.Player.Interact.WasPressedThisFrame())
         {
             PickUp();
         }

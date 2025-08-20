@@ -188,19 +188,19 @@ public class JigsawManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (PlayerMovement.instance.playerController.Player.Click.WasPressedThisFrame())
         {
 
-            RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
+            RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(PlayerMovement.instance.playerController.Player.MousePosition.ReadValue<Vector2>()), Vector2.zero);
             if (hit)
             {
                 draggingPiece = hit.transform;
-                offset = draggingPiece.position - Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                offset = draggingPiece.position - Camera.main.ScreenToWorldPoint(PlayerMovement.instance.playerController.Player.MousePosition.ReadValue<Vector2>());
                 offset += Vector3.back;
             }
         }
 
-        if (draggingPiece && Input.GetMouseButtonUp(0))
+        if (draggingPiece && PlayerMovement.instance.playerController.Player.Click.WasReleasedThisFrame())
         {
             SnapAndDisableIfCorrect();
             draggingPiece.position += Vector3.forward;
@@ -209,7 +209,7 @@ public class JigsawManager : MonoBehaviour
 
         if (draggingPiece)
         {
-            Vector3 newPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            Vector3 newPosition = Camera.main.ScreenToWorldPoint(PlayerMovement.instance.playerController.Player.MousePosition.ReadValue<Vector2>());
             newPosition += offset;
             draggingPiece.position = newPosition;
         }

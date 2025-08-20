@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -17,21 +18,40 @@ public class PlayerMovement : MonoBehaviour
     private readonly int walkDown = Animator.StringToHash("WalkDown");
     private readonly int walkRight = Animator.StringToHash("WalkRight");
 
+    private PlayerInput playerInput;
+    public PlayerController playerController;
+    public static PlayerMovement instance;
+
+    private void Awake()
+    {
+        if(instance != null && instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        instance = this;
+    }
+
     private void Start()
     {
+        playerController = new();
         rb = GetComponent<Rigidbody2D>();
+        playerInput = GetComponent<PlayerInput>();
         animator = GetComponent<Animator>();
+        playerInput.currentActionMap = playerController.Player;
         //deathScreenController = FindObjectOfType<DeathScreenController>();
     }
 
     //used for inputs
     void Update()
     {
-        movement.x = Input.GetAxisRaw("Horizontal");
-        movement.y = Input.GetAxisRaw("Vertical");
+        /* movement.x = Input.GetAxisRaw("Horizontal");
+         movement.y = Input.GetAxisRaw("Vertical");*/
+        movement.x = playerController.Player.Move.ReadValue<Vector2>().x; 
+        movement.y = playerController.Player.Move.ReadValue<Vector2>().y;
         moveInput.Normalize();
 
-        Vector2 moveDelta = new Vector2 (movement.x, movement.y);
+        Vector2 moveDelta = new Vector2 (movement.x, movement.y).normalized;
 
         animator.SetFloat("Horizontal", movement.x);
         animator.SetFloat("Vertical", movement.y);
@@ -91,7 +111,7 @@ public class PlayerMovement : MonoBehaviour
         rb.MovePosition(rb.position +  movement * moveSpeed * Time.fixedDeltaTime);
     }
 
-
+    
 
     /*void Muerte()
     {

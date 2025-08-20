@@ -17,7 +17,7 @@ public class StartPuzzle : MonoBehaviour
 
     public void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E))
+        if (PlayerMovement.instance.playerController.Player.Interact.WasPressedThisFrame())
         {
             StartPuzzleMiniGame();
         }

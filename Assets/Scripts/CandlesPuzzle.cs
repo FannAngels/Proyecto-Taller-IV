@@ -16,6 +16,7 @@ public class CandlesPuzzle : MonoBehaviour
     [Header("Interaction Settings")]
     [SerializeField] public float interactionDistance = 1.0f;
 
+
     private void Awake()
     {
         if (candleFire != null) { candleFire.SetActive(false); }
@@ -35,7 +36,7 @@ public class CandlesPuzzle : MonoBehaviour
     private void Update()
     {
 
-        if (Input.GetKeyDown(KeyCode.E))
+        if (PlayerMovement.instance.playerController.Player.Interact.WasPressedThisFrame())
         {
             TryToLightCandle();
         }
