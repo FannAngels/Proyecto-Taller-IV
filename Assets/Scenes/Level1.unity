@@ -419,10 +419,14 @@ MonoBehaviour:
   imageTexture:
   - {fileID: 2800000, guid: baff5cd007495dc428bf63ac739d7221, type: 3}
   - {fileID: 2800000, guid: 905203f1e0fef564da06ab343b1aaaa3, type: 3}
+  ImagePuzzle: []
   levelSelectPanel: {fileID: 1378757079}
   levelSelectPrefab: {fileID: 2753181817291353602, guid: 6229d11370672984c9d257168c161e8d,
     type: 3}
-  playAgainButton: {fileID: 1439977366}
+  imageIndextext: {fileID: 0}
+  winCondition: {fileID: 0}
+  completeButton: {fileID: 0}
+  finishButton: {fileID: 0}
 --- !u!1 &113072196
 GameObject:
   m_ObjectHideFlags: 0
@@ -47024,11 +47028,31 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
+  - first: {x: -22, y: -46, z: 0}
+    second:
+      serializedVersion: 2
+      m_TileIndex: 10
+      m_TileSpriteIndex: 10
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 0
+      m_TileObjectToInstantiateIndex: 65535
+      dummyAlignment: 0
+      m_AllTileFlags: 1073741825
   - first: {x: -25, y: -30, z: 0}
     second:
       serializedVersion: 2
       m_TileIndex: 9
       m_TileSpriteIndex: 9
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 0
+      m_TileObjectToInstantiateIndex: 65535
+      dummyAlignment: 0
+      m_AllTileFlags: 1073741825
+  - first: {x: -27, y: -29, z: 0}
+    second:
+      serializedVersion: 2
+      m_TileIndex: 11
+      m_TileSpriteIndex: 11
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -47086,6 +47110,10 @@ Tilemap:
     m_Data: {fileID: 11400000, guid: befe02eb553c58e45adefbc9fa49fc8d, type: 2}
   - m_RefCount: 1
     m_Data: {fileID: 11400000, guid: 3c573bf10cc805c45a7613c6302425ab, type: 2}
+  - m_RefCount: 1
+    m_Data: {fileID: 11400000, guid: 06cceb8aab710754ea3d5fbb6e667e1c, type: 2}
+  - m_RefCount: 1
+    m_Data: {fileID: 11400000, guid: 1a14bd77a7209344d9b7543a32ded1f5, type: 2}
   m_TileSpriteArray:
   - m_RefCount: 3
     m_Data: {fileID: -3251090862421354379, guid: 685fe742da98ed442a68d3ab3ab0945b,
@@ -47113,8 +47141,14 @@ Tilemap:
   - m_RefCount: 1
     m_Data: {fileID: 5298984622355138470, guid: b0165ad29b74e3b4092d656bd5a6a89a,
       type: 3}
+  - m_RefCount: 1
+    m_Data: {fileID: 2670296782197889510, guid: 94b40e50fa0c64d468655f39260b7db3,
+      type: 3}
+  - m_RefCount: 1
+    m_Data: {fileID: -1684449808544159662, guid: 72a901d8875d9914f9094f0fdd27e72f,
+      type: 3}
   m_TileMatrixArray:
-  - m_RefCount: 27
+  - m_RefCount: 29
     m_Data:
       e00: 1
       e01: 0
@@ -47133,7 +47167,7 @@ Tilemap:
       e32: 0
       e33: 1
   m_TileColorArray:
-  - m_RefCount: 27
+  - m_RefCount: 29
     m_Data: {r: 1, g: 1, b: 1, a: 1}
   m_TileObjectToInstantiateArray: []
   m_AnimationFrameRate: 1
@@ -47931,6 +47965,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a1fc263854af24478230594d5d1f5a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  imageOne: 0
+  imageTwo: 0
+  finishButton: {fileID: 0}
 --- !u!61 &1052210767
 BoxCollider2D:
   m_ObjectHideFlags: 0
