@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class JigsawManager : MonoBehaviour
 {
+    #region Variables
     [Header("Puzzle Elements")]
     [Range(2, 6)]
     [SerializeField] private int difficulty = 4;
@@ -14,10 +15,10 @@ public class JigsawManager : MonoBehaviour
 
     [Header("UI Elements")]
     [SerializeField] private List<Texture2D> imageTexture;
+    [SerializeField] private List<Image> ImagePuzzle;
     [SerializeField] private Transform levelSelectPanel;
     [SerializeField] private Image levelSelectPrefab;
-    [SerializeField] private GameObject playAgainButton;
-    [SerializeField] private GameObject playAgainButton2;
+    public Text imageIndextext;
 
     private List<Transform> pieces;
     private Vector2Int dimensions;
@@ -30,36 +31,41 @@ public class JigsawManager : MonoBehaviour
     private int piecesCorrect;
 
     public WinCondition winCondition;
+    public Button completeButton; 
+    public Button finishButton;
 
     int imageIndex;
+    #endregion
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        imageTexture.
+        /*  for (int i = 0; i < imageTexture.Count; i++)
+          {
+              Image image = Instantiate(levelSelectPrefab, levelSelectPanel);
+              image.sprite = Sprite.Create(imageTexture[i], new Rect(0, 0, imageTexture[i].width, imageTexture[i].height), Vector2.zero);
 
-
-        for (int i = 0; i < imageTexture.Count; i++)
-        {
-            Image image = Instantiate(levelSelectPrefab, levelSelectPanel);
-            image.sprite = Sprite.Create(imageTexture[i], new Rect(0, 0, imageTexture[i].width, imageTexture[i].height), Vector2.zero);
-
-            image.GetComponent<Button>().onClick.AddListener(delegate { StartGame(imageTexture[i], i + 1); });
-        }
-
-        /*foreach (Texture2D texture in imageTexture)
+              image.GetComponent<Button>().onClick.AddListener(delegate { StartGame(imageTexture[i]); });
+          }
+  */
+        foreach (Texture2D texture in imageTexture)
         {
             Image image = Instantiate(levelSelectPrefab, levelSelectPanel);
             image.sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), Vector2.zero);
 
             image.GetComponent<Button>().onClick.AddListener(delegate { StartGame(texture); });
 
-            
-        }*/
+            ImagePuzzle.Add(image);
+        }
+
+        imageIndextext.text = imageIndex.ToString();
+        completeButton.gameObject.SetActive(false);
+        finishButton.gameObject.SetActive(false);
     }
 
+
     // Update is called once per frame
-    public void StartGame(Texture2D jigsawTexture, int puzzle)
+    public void StartGame(Texture2D jigsawTexture)
     {
         levelSelectPanel.gameObject.SetActive(false);
 
@@ -78,7 +84,7 @@ public class JigsawManager : MonoBehaviour
 
         piecesCorrect = 0;
 
-        imageIndex = puzzle;
+        completeButton.gameObject.SetActive(false);
     }
 
     Vector2Int GetDimensions(Texture2D jigsawTexture, int difficulty)
@@ -228,22 +234,32 @@ public class JigsawManager : MonoBehaviour
 
                 if (piecesCorrect == pieces.Count)
                 {
-                    switch (imageIndex)
-                    {
-                        case 1:
-                            playAgainButton.SetActive(true);
-                            break;
-
-                        case 2:
-                            playAgainButton2.SetActive(true);
-                            break;
-                    }
+                    completeButton.gameObject.SetActive(true);
                 }
             }
         }
+
+        switch (imageIndex)
+        {
+            case 0:
+                ImagePuzzle[0].gameObject.SetActive(true);
+                ImagePuzzle[1].gameObject.SetActive(false);
+                break;
+            case 1:
+                ImagePuzzle[0].gameObject.SetActive(false);
+                ImagePuzzle[1].gameObject.SetActive(true);
+                break;
+            case 2:
+                ImagePuzzle[0].gameObject.SetActive(true);
+                ImagePuzzle[1].gameObject.SetActive(true);
+                break;
+
+        }
+
+
     }
 
-    public void RestartGame(int puzzle)
+    public void RestartGame()
     {
         foreach (Transform piece in pieces)
         {
@@ -253,28 +269,28 @@ public class JigsawManager : MonoBehaviour
 
         gameHolder.GetComponent<LineRenderer>().enabled = false;
 
-        playAgainButton.SetActive(false);
+        //completeButton.gameObject.SetActive(false);
         levelSelectPanel.gameObject.SetActive(true);
 
-        winCondition.ImageDone(puzzle);
-
-    }
-
-    public void RestartGame2(int puzzle)
-    {
-        foreach (Transform piece in pieces)
+        if(imageIndex < 2)
         {
-            Destroy(piece.gameObject);
+            imageIndex++;
+            imageIndextext.text = imageIndex.ToString();
         }
-        pieces.Clear();
+    
+        if(imageIndex == 2)
+        {
+            finishButton.gameObject.SetActive(true);
+        }
 
-        gameHolder.GetComponent<LineRenderer>().enabled = false;
-
-        playAgainButton.SetActive(false);
-        levelSelectPanel.gameObject.SetActive(true);
-
-        winCondition.ImageDone(puzzle);
+      
 
     }
+
+    public void FinishGame()
+    {
+        winCondition.FinishGame();
+    }
+
 
 }

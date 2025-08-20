@@ -43,6 +43,10 @@ public class WinCondition : MonoBehaviour
         }
     }
 
+    public void FinishGame()
+    {
+        SceneManager.LoadScene("WinScreen");
+    }
 
 
     /*private void OnCollisionEnter2D(Collision2D collision)
